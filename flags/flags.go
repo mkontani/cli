@@ -269,6 +269,12 @@ the **--team** option. If the url contains <\<\>> placeholders, they are replace
 		Name:  "set-file",
 		Usage: "The <path> of a JSON file with the template data to send to the CA.",
 	}
+
+	// DefaultIdentity is a cli.StringFlag used to pass the identity.
+	DefaultIdentity = cli.StringFlag{
+		Name:  "default-identity",
+		Usage: "The default <identity>.",
+	}
 )
 
 // ParseTimeOrDuration is a helper that returns the time or the current time

@@ -69,17 +69,22 @@ $ step ssh login --not-after 1h joe@smallstep.com
 			flags.Offline,
 			flags.CaConfig,
 			flags.Force,
+			flags.DefaultIdentity,
 		},
 	}
 }
 
 func loginAction(ctx *cli.Context) error {
+	var subject string
 	if err := errs.NumberOfArguments(ctx, 1); err != nil {
-		return err
+		if subject = ctx.String("default-identity"); subject == "" {
+			return err
+		}
+	} else {
+		// Arguments
+		subject = ctx.Args().First()
 	}
 
-	// Arguments
-	subject := ctx.Args().First()
 	user := provisioner.SanitizeSSHUserPrincipal(subject)
 	principals := []string{user}
 
